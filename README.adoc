@@ -1,0 +1,6 @@
+= picon
+:imagesdir: doc/images
+
+Your favorite build tool companion
+
+image::picon-logo.png[]

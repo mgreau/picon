@@ -1,0 +1,28 @@
+name: gradle-integration-test 
+workers:
+    # worker id to reference in tasks
+  - id: dynamodb
+    # worker docker image
+    image: peopleperhour/dynamodb
+  - id: gradle
+    image: 3.4.1-jre8-alpine
+stages:
+  - name: prepare-integration-test
+    tasks:
+        - name: start dynamodb
+          # worker to use for the task
+          worker: dynamodb
+          # worker type (run or kill) (run by default)
+          type: run
+          params: "-p 8000 -e awsRegion=EU_WEST_1 -e awsAccessKey=KEY -e awsSecretKey=SECRET_KEY"
+          timeout: 300s
+  - name: build & test
+    tasks:
+        - name: gradle build
+          worker: gradle
+          params: clean integrationTest
+  - name: cleanup
+    tasks:
+        - name: stop dynamodb
+          worker: dynamodb
+          type: kill
