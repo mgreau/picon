@@ -1,6 +1,8 @@
 = picon
 :imagesdir: doc/images
 
-Your favorite build tool companion
+Status: WIP
 
-image::picon-logo.png[]
+image::picon-logo.png[picon,200]
+
+image::picon-overview.png[picon,500]
